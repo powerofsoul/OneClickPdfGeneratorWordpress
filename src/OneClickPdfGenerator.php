@@ -49,7 +49,12 @@ class OneClickPdfGenerator {
 
             $mpdf = new \Mpdf\Mpdf();
             $mpdf->WriteHTML($html);
-            
+            ob_clean();
+            header('Content-type: application/pdf');
+            header('Content-Disposition: inline; filename="' . $test . '"');
+            header('Content-Transfer-Encoding: binary');
+            header('Accept-Ranges: bytes');
+
             $mpdf->Output('test.pdf', 'D');
         }
     }
